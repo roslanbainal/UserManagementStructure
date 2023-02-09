@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using UserManagement.Data.Configurations;
 using UserManagement.Data.Entities;
-using UserManagement.Helpers;
+using UserManagement.Data.Seeds;
 
 namespace UserManagement.Data
 {
@@ -21,8 +21,7 @@ namespace UserManagement.Data
             Factory.CustomModelCreating(builder);
 
             //Seed data
-            DataSeeder.SeedRole(builder);
-            DataSeeder.SeedUserAdmin(builder);
+            DataSeeder.Create(builder);
         }
     }
 }

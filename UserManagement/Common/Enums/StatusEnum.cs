@@ -6,6 +6,8 @@
         Failed = 2,
         Active = 3,
         Deactive = 4,
-        Deleted = 5
+        Deleted = 5,
+        NotRegister = 6,
+        NotConfirmed = 7
     }
 }

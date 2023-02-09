@@ -14,7 +14,7 @@ namespace UserManagement.Extensions
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseOracle(
-                    configuration.GetConnectionString("DefaultConnection")));
+                    configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {

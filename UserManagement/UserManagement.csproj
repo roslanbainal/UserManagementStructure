@@ -17,9 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Converters\" />
-    <Folder Include="Models\ViewModels\AuthenticateViewModels\" />
-    <Folder Include="Models\ViewModels\UserManagementViewModels\" />
     <Folder Include="Security\" />
   </ItemGroup>
 
