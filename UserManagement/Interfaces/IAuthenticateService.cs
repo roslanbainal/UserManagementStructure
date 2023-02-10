@@ -5,8 +5,8 @@ namespace UserManagement.Interfaces
 {
     public interface IAuthenticateService
     {
-        Task<Tuple<StatusEnum, List<string>?>> ChangePassword(ChangePasswordViewModel model);
-        Task<StatusEnum> Login(LoginViewModel model);
-        Task<StatusEnum> Register(RegisterViewModel model);
+        Task<AuthenticateResponse> ChangePassword(ChangePasswordViewModel model);
+        Task<AuthenticateStatus> Login(LoginViewModel model);
+        Task<AuthenticateStatus> Register(RegisterViewModel model);
     }
 }

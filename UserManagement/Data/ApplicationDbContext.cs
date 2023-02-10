@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UserManagement.Data.Configurations;
-using UserManagement.Data.Entities;
 using UserManagement.Data.Seeds;
+using UserManagement.Models.Entities;
 
 namespace UserManagement.Data
 {

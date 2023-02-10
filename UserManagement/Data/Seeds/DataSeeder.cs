@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using UserManagement.Data.Entities;
+using UserManagement.Models.Entities;
 
 namespace UserManagement.Data.Seeds
 {
     // To add data if table is empty
     public class DataSeeder
     {
-        private const string ROLENAME = "Super Admin";
-        private const string EMAIL = "admin-st@yopmail.com";
-        private const string PASSWORD = "AQAAAAEAACcQAAAAEM3rDxVY2sLJsX6rVxCd6/ZRXZEoZssNlROSGYXy8dskBIVvcYr0JJl2Vd5a+x9+5Q==";
+        private const string _RoleName = "Super Admin";
+        private const string _Email = "admin-st@yopmail.com";
+        private const string _Password = "AQAAAAEAACcQAAAAEM3rDxVY2sLJsX6rVxCd6/ZRXZEoZssNlROSGYXy8dskBIVvcYr0JJl2Vd5a+x9+5Q==";
 
         public static void Create(ModelBuilder builder)
         {
@@ -22,8 +22,8 @@ namespace UserManagement.Data.Seeds
             builder.Entity<ApplicationRole>().HasData(
                 new ApplicationRole { Id = 1, 
                     ConcurrencyStamp = Guid.NewGuid().ToString(),
-                    Name = ROLENAME,
-                    NormalizedName = ROLENAME.ToUpper()
+                    Name = _RoleName,
+                    NormalizedName = _RoleName.ToUpper()
                 }
             );
         }
@@ -34,15 +34,15 @@ namespace UserManagement.Data.Seeds
                 new ApplicationUser
                 {
                     Id = 1,
-                    UserName = EMAIL,
+                    UserName = _Email,
                     ConcurrencyStamp = Guid.NewGuid().ToString(),
-                    Email = EMAIL,
-                    NormalizedEmail = EMAIL.ToUpper(),
-                    NormalizedUserName = EMAIL.ToUpper(),
+                    Email = _Email,
+                    NormalizedEmail = _Email.ToUpper(),
+                    NormalizedUserName = _Email.ToUpper(),
                     SecurityStamp = Guid.NewGuid().ToString(),
                     AccessFailedCount = 0,
                     EmailConfirmed = true,
-                    PasswordHash = PASSWORD
+                    PasswordHash = _Password
                 }
             );
 

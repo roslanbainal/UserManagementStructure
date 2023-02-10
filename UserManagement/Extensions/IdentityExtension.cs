@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UserManagement.Data;
-using UserManagement.Data.Entities;
+using UserManagement.Models.Entities;
 
 namespace UserManagement.Extensions
 {

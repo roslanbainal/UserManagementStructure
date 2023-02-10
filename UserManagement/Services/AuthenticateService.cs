@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using UserManagement.Common.Enums;
-using UserManagement.Data.Entities;
 using UserManagement.Interfaces;
+using UserManagement.Models.Entities;
 using UserManagement.Models.ViewModels.AuthenticateViewModels;
 
 namespace UserManagement.Services
@@ -18,61 +18,53 @@ namespace UserManagement.Services
             _signInManager = signInManager;
         }
 
-        public async Task<StatusEnum> Login(LoginViewModel model)
+        public async Task<AuthenticateStatus> Login(LoginViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
 
             if (user is null)
             {
-                return StatusEnum.NotRegister;
+                return AuthenticateStatus.NotRegistered;
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password,false, lockoutOnFailure:true);
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, lockoutOnFailure: true);
 
             if (result.Succeeded)
             {
-                return StatusEnum.Success;
+                return AuthenticateStatus.Success;
             }
 
-            return StatusEnum.Failed;
+            return AuthenticateStatus.Failure;
         }
 
-        public async Task<StatusEnum> Register(RegisterViewModel model)
+        public async Task<AuthenticateStatus> Register(RegisterViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
 
-            if(user is null)
-            {
-                return StatusEnum.NotRegister;
-            }
+            if (user is null) return AuthenticateStatus.NotRegistered;
 
             var result = await _userManager.CreateAsync(user);
 
             if (result.Succeeded)
             {
-                return StatusEnum.Success;
+                return AuthenticateStatus.Success;
             }
 
-            return StatusEnum.Failed;
+            return AuthenticateStatus.Failure;
         }
 
-        public async Task<Tuple<StatusEnum, List<string>?>> ChangePassword(ChangePasswordViewModel model)
+        public async Task<AuthenticateResponse> ChangePassword(ChangePasswordViewModel model)
         {
             var user = await _userManager.FindByIdAsync(model.UserId.ToString());
-
-            if(user is null)
-            {
-                return new Tuple<StatusEnum, List<string>?>(StatusEnum.NotRegister, null);
-            }
+            if (user is null) return new AuthenticateResponse { Status = AuthenticateStatus.NotRegistered, Message = AuthenticateResponse.Messages.NotRegistered, Errors = null };
 
             var result = await _userManager.ChangePasswordAsync(user, model.Password, model.ConfirmPassword);
-
-            if (result.Succeeded)
-            {
-                return new Tuple<StatusEnum, List<string>?>(StatusEnum.Success, null);
-            }
-
-            return new Tuple<StatusEnum, List<string>?>(StatusEnum.NotRegister, result.Errors.Select(x => x.Description).ToList());
+            return result.Succeeded
+                ? new AuthenticateResponse { Status = AuthenticateStatus.Success, Message = AuthenticateResponse.Messages.UpdatePasswordSucceeded, Errors = null }
+                : new AuthenticateResponse { Status = AuthenticateStatus.Failure, Message = AuthenticateResponse.Messages.PasswordCriteria, Errors = result.Errors.Select(x => x.Description).ToList() };
         }
+
+
+
     }
 }

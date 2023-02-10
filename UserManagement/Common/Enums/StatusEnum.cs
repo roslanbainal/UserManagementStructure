@@ -1,13 +1,13 @@
 ﻿namespace UserManagement.Common.Enums
 {
-    public enum StatusEnum
+    public enum AuthenticateStatus
     {
         Success = 1,
-        Failed = 2,
+        Failure = 2,
         Active = 3,
         Deactive = 4,
         Deleted = 5,
-        NotRegister = 6,
+        NotRegistered = 6,
         NotConfirmed = 7
     }
 }
