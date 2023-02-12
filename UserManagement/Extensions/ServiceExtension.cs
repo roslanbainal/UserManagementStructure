@@ -1,4 +1,5 @@
-﻿using UserManagement.Interfaces;
+﻿
+using UserManagement.Interfaces;
 using UserManagement.Services;
 using UserManagement.Services.Scheduler;
 
@@ -14,9 +15,11 @@ namespace UserManagement.Extensions
             #endregion
 
             #region Add Services
+
             services.AddTransient<IAuthenticateService, AuthenticateService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IEmailService, EmailService>();
+
             #endregion
         }
     }

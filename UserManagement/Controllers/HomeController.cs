@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using UserManagement.Models;
+using UserManagement.Security.Authorization;
 
 namespace UserManagement.Controllers
 {
@@ -18,6 +20,7 @@ namespace UserManagement.Controllers
             return View();
         }
 
+        [Authorize(Policy = "EndpointAccess")]
         public IActionResult Privacy()
         {
             return View();
