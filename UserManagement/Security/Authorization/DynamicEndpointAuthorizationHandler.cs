@@ -16,7 +16,7 @@ namespace UserManagement.Security.Authorization
 
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, DynamicEndpointAuthorizationRequirement requirement)
         {
-            var endpoint = _endpointStore.GetEndpoint(_httpContextAccessor?.HttpContext?.GetRouteData());
+            var endpoint = _endpointStore.GetEndpoint(_httpContextAccessor.HttpContext.GetRouteData());
 
             if (endpoint == null)
             {
@@ -24,9 +24,9 @@ namespace UserManagement.Security.Authorization
             }
             else
             {
-                endpoint.ApplicationRoles.Select(x => x.Id).ToList().ForEach(r =>
+                endpoint.ApplicationRoles.ToList().ForEach(r =>
                 {
-                    if (context.User.IsInRole(r.ToString()))
+                    if (context.User.IsInRole(r.Name))
                     {
                         context.Succeed(requirement);
                     }
